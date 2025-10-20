@@ -1,7 +1,7 @@
 package com.example.hire.repository;
 
 import com.example.hire.entity.Project;
-import com.example.hire.enums.ProjectStatus;
+import com.example.hire.entity.ProjectStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
