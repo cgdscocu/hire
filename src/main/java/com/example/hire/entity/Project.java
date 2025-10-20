@@ -1,5 +1,6 @@
 package com.example.hire.entity;
 
+import com.example.hire.enums.ProjectStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +23,8 @@ public class Project {
     @Column(name = "project_name", nullable = false, length = 255)
     private String projectName;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private ProjectStatus status;
     
     @Column(name = "created_date", nullable = false)

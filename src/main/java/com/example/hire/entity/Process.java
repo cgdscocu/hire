@@ -36,6 +36,19 @@ public class Process {
     @Column(nullable = false)
     private ProcessStatus status;
     
+    // Süreç tarih aralıkları:
+    @Column(name = "start_date")
+    private java.time.LocalDateTime startDate;
+    
+    @Column(name = "end_date")
+    private java.time.LocalDateTime endDate;
+    
+    @Column(name = "planned_start_date")
+    private java.time.LocalDateTime plannedStartDate;
+    
+    @Column(name = "planned_end_date")
+    private java.time.LocalDateTime plannedEndDate;
+    
     @Column(name = "created_date", nullable = false)
     private java.time.LocalDateTime createdDate;
     

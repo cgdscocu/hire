@@ -21,10 +21,7 @@ public class Position {
     
     @Column(name = "position_name", nullable = false, length = 255)
     private String positionName;
-    
-    @Column(name = "department", length = 100)
-    private String department;
-    
+
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate;
     

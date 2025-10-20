@@ -39,6 +39,22 @@ public class ApplicationDetails {
     @Column(name = "additional_notes", length = 1000)
     private String additionalNotes;
     
+    // Form sistemi için yeni alanlar:
+    @Column(name = "form_token", unique = true)
+    private String formToken; // UUID - form linki için
+    
+    @Column(name = "form_expiry_date")
+    private LocalDateTime formExpiryDate;
+    
+    @Column(name = "is_form_active")
+    private Boolean isFormActive = false;
+    
+    @Column(name = "form_questions", length = 2000)
+    private String formQuestions; // JSON: hangi sorular form'da
+    
+    @Column(name = "is_eliminated")
+    private Boolean isEliminated = false; // Aday elendi mi?
+    
     @CreatedDate
     @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDateTime createdDate;
