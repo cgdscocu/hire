@@ -94,10 +94,8 @@ public class ProcessValidationService {
             LocalDateTime currentEndDate = getEndDateForType(processDates, currentType);
             LocalDateTime nextStartDate = getStartDateForType(processDates, nextType);
 
-            if (currentEndDate != null && nextStartDate != null) {
-                if (nextStartDate.isBefore(currentEndDate)) {
-                    throw new IllegalArgumentException("Process " + nextType + " cannot start before " + currentType + " ends");
-                }
+            if (currentEndDate != null && nextStartDate != null && nextStartDate.isBefore(currentEndDate)) {
+                throw new IllegalArgumentException("Process " + nextType + " cannot start before " + currentType + " ends");
             }
         }
     }
