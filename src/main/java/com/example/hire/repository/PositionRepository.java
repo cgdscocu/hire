@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PositionRepository extends JpaRepository<Position, Long> {
     
- 
+    // Case-insensitive position name kontrolü
+    boolean existsByPositionNameIgnoreCase(String positionName);
+    
+    // Case-insensitive position name ile arama
+    Position findByPositionNameIgnoreCase(String positionName);
 }
 

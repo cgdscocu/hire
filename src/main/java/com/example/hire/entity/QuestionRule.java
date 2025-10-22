@@ -24,7 +24,7 @@ public class QuestionRule {
     private String ruleCode;
 
     @Column(name = "operator", nullable = false, length = 10)
-    private String operator; // e.g. ==, !=, >, >=, <, <=, IN, NOT_IN
+    private String operator; // örnek ==, !=, >, >=, <, <=, IN, NOT_IN
 
     @Column(name = "target_value", nullable = false, length = 500)
     private String targetValue;

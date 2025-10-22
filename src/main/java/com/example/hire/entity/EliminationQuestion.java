@@ -41,6 +41,20 @@ public class EliminationQuestion {
     @Column(name = "is_must_have", nullable = false)
     private Boolean isMustHave = false; // Must-Have qualification mı?
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "process_id", nullable = false)
+    private Process process;
+
+    @Transient
+    private Long projectId;
+
+    @Transient
+    private Long processId;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<QuestionOption> options = new ArrayList<>();
 

@@ -20,7 +20,7 @@ public class ProcessValidationService {
             throw new IllegalArgumentException("Process dates cannot be null or empty");
         }
 
-        // 1. Tüm 4 süreç olmalı
+        // 1. 4 süreç olmalı
         validateAllProcessTypesPresent(processDates);
 
         // 2. Her süreç için tarih validasyonu

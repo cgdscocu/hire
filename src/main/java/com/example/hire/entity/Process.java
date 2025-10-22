@@ -36,7 +36,6 @@ public class Process {
     @Column(nullable = false)
     private ProcessStatus status;
     
-    // Süreç tarih aralıkları:
     @Column(name = "start_date")
     private java.time.LocalDateTime startDate;
     

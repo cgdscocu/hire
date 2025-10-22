@@ -4,9 +4,10 @@ import com.example.hire.entity.ApplicationDetails;
 import com.example.hire.entity.Process;
 import com.example.hire.entity.ProcessStep;
 import com.example.hire.enums.ProcessType;
+import com.example.hire.exception.BusinessException;
+import com.example.hire.exception.NotFoundException;
 import com.example.hire.repository.ApplicationDetailsRepository;
 import com.example.hire.repository.ProcessRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,10 +17,8 @@ import java.util.UUID;
 @Service
 public class ApplicationFormService {
 
-    @Autowired
     private ApplicationDetailsRepository applicationDetailsRepository;
 
-    @Autowired
     private ProcessRepository processRepository;
 
     /**
@@ -30,7 +29,7 @@ public class ApplicationFormService {
         // Application sürecini bul
         Process applicationProcess = findApplicationProcess(projectId);
         if (applicationProcess == null) {
-            throw new RuntimeException("Application süreci bulunamadı!");
+            throw new NotFoundException("Application süreci bulunamadı! Project ID: " + projectId);
         }
 
         // Token oluştur
@@ -60,7 +59,7 @@ public class ApplicationFormService {
             return false; // Token bulunamadı
         }
         
-        if (!applicationDetails.getIsFormActive()) {
+        if (applicationDetails.getIsFormActive() == null || !applicationDetails.getIsFormActive()) {
             return false; // Form aktif değil
         }
         
@@ -105,10 +104,9 @@ public class ApplicationFormService {
             .orElse(null);
             
         if (applicationStep == null) {
-            throw new RuntimeException("Application sürecinin adımı bulunamadı!");
+            throw new BusinessException("Application sürecinin adımı bulunamadı! Process ID: " + applicationProcess.getId());
         }
         
-        // ApplicationDetails'i bul
         ApplicationDetails existingDetails = applicationDetailsRepository.findByProcessStep(applicationStep);
         
         if (existingDetails != null) {

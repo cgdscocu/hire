@@ -7,7 +7,6 @@ import com.example.hire.enums.ProcessStatus;
 import com.example.hire.enums.ProcessType;
 import com.example.hire.repository.ProcessRepository;
 import com.example.hire.repository.ProjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,44 +16,33 @@ import java.util.List;
 @Service
 public class ProjectService {
 
-    @Autowired
-    private ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
+    private final ProcessRepository processRepository;
+    private final ProcessValidationService processValidationService;
 
-    @Autowired
-    private ProcessRepository processRepository;
+    public ProjectService(ProjectRepository projectRepository, 
+                         ProcessRepository processRepository, 
+                         ProcessValidationService processValidationService) {
+        this.projectRepository = projectRepository;
+        this.processRepository = processRepository;
+        this.processValidationService = processValidationService;
+    }
 
-    @Autowired
-    private ProcessValidationService processValidationService;
-
-    /**
-     * Project oluştur ve 4 ana süreci otomatik oluştur
-     */
     @Transactional
     public Project createProject(Project project, List<ProcessDateDTO> processDates) {
-        // Validasyon yap
         processValidationService.validateProcessDates(processDates);
-        
-        // Project'i kaydet
         project.setCreatedDate(LocalDateTime.now());
         project.setUpdatedDate(LocalDateTime.now());
         Project savedProject = projectRepository.save(project);
-
-        // 4 ana süreci belirtilen tarihlerle oluştur
         createProcessesWithDates(savedProject, processDates);
 
         return savedProject;
     }
 
-    /**
-     * Tüm projeleri getir
-     */
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }
 
-    /**
-     * 4 ana süreci belirtilen tarihlerle oluştur
-     */
     private void createProcessesWithDates(Project project, List<ProcessDateDTO> processDates) {
         for (ProcessDateDTO processDateDTO : processDates) {
             Process process = new Process();
