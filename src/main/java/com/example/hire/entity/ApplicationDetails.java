@@ -54,6 +54,19 @@ public class ApplicationDetails {
     
     @Column(name = "is_eliminated")
     private Boolean isEliminated = false; // Aday elendi mi?
+
+    // MVP: Public formdan gelen temel kişisel bilgiler
+    @Column(name = "applicant_name", length = 150)
+    private String applicantName;
+
+    @Column(name = "email", length = 150)
+    private String email;
+
+    @Column(name = "phone", length = 50)
+    private String phone;
+
+    @Column(name = "cv_url", length = 500)
+    private String cvUrl;
     
     @CreatedDate
     @Column(name = "created_date", nullable = false, updatable = false)

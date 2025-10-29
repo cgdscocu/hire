@@ -24,7 +24,6 @@ public class PositionMapper {
         }
         
         Position position = new Position();
-        // ID'yi set etme - yeni entity için null olmalı
         position.setPositionName(dto.getPositionName());
         return position;
     }

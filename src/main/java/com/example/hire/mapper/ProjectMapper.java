@@ -25,7 +25,6 @@ public class ProjectMapper {
         dto.setStatus(project.getStatus());
         dto.setPositionId(project.getPosition() != null ? project.getPosition().getId() : null);
         
-        // Process dates'i DTO'ya çevir
         if (project.getProcesses() != null) {
             List<ProcessDateDTO> processDates = project.getProcesses().stream()
                 .map(process -> {
@@ -48,7 +47,6 @@ public class ProjectMapper {
         }
         
         Project project = new Project();
-        // ID'yi set etme - yeni entity için null olmalı
         project.setProjectName(dto.getProjectName());
         project.setStatus(dto.getStatus());
         

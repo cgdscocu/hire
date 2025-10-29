@@ -49,6 +49,26 @@ public class ApplicationFormService {
         return token;
     }
 
+    public ApplicationDetails getByTokenOrThrow(String token) {
+        ApplicationDetails applicationDetails = applicationDetailsRepository.findByFormToken(token);
+        if (applicationDetails == null) {
+            throw new NotFoundException("Geçersiz form token");
+        }
+        return applicationDetails;
+    }
+
+    public ApplicationDetails updatePersonalInfo(String token, String applicantName, String email, String phone, String cvUrl) {
+        if (!isTokenValid(token)) {
+            throw new BusinessException("Form token geçersiz veya süresi dolmuş");
+        }
+        ApplicationDetails details = getByTokenOrThrow(token);
+        details.setApplicantName(applicantName);
+        details.setEmail(email);
+        details.setPhone(phone);
+        details.setCvUrl(cvUrl);
+        return applicationDetailsRepository.save(details);
+    }
+
     /**
      * Token geçerliliğini kontrol et
      */
