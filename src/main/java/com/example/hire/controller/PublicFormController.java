@@ -47,7 +47,7 @@ public class PublicFormController {
         dto.setPersonalInfo(new FormPublicResponseDTO.PersonalInfoConfig(true, true, true, true));
 
         List<EliminationQuestion> questions =
-            questionRepository.findByProjectIdAndProcessIdAndActiveTrueOrderByDisplayOrderAsc(
+            questionRepository.findByProject_IdAndProcess_IdAndActiveTrueOrderByDisplayOrderAsc(
                 process.getProject().getId(), process.getId());
 
         dto.setQuestions(questions.stream().map(q -> new FormPublicResponseDTO.QuestionDTO(

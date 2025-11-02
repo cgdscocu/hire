@@ -11,10 +11,10 @@ public interface EliminationQuestionRepository extends JpaRepository<Elimination
     List<EliminationQuestion> findByActiveTrueOrderByDisplayOrderAsc();
     
     // Proje ve süreç bazlı sorgular
-    List<EliminationQuestion> findByProjectIdAndProcessId(Long projectId, Long processId);
-    List<EliminationQuestion> findByProjectId(Long projectId);
-    List<EliminationQuestion> findByProcessId(Long processId);
-    List<EliminationQuestion> findByProjectIdAndProcessIdAndActiveTrueOrderByDisplayOrderAsc(Long projectId, Long processId);
+    List<EliminationQuestion> findByProject_IdAndProcess_Id(Long projectId, Long processId);
+    List<EliminationQuestion> findByProject_Id(Long projectId);
+    List<EliminationQuestion> findByProcess_Id(Long processId);
+    List<EliminationQuestion> findByProject_IdAndProcess_IdAndActiveTrueOrderByDisplayOrderAsc(Long projectId, Long processId);
 }
 
 

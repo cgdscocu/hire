@@ -1,5 +1,6 @@
 package com.example.hire.entity;
 
+import com.example.hire.enums.EvaluationOperator;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +24,12 @@ public class QuestionRule {
     @Column(name = "rule_code", nullable = false, length = 100)
     private String ruleCode;
 
-    @Column(name = "operator", nullable = false, length = 10)
-    private String operator; // örnek ==, !=, >, >=, <, <=, IN, NOT_IN
+    @Enumerated(EnumType.STRING)
+    @Column(name = "operator", nullable = false, length = 50)
+    private EvaluationOperator operator;
 
     @Column(name = "target_value", nullable = false, length = 500)
-    private String targetValue;
+    private String targetValue; // JSON formatında da olabilir (IN için ["value1", "value2"])
 }
 
 
